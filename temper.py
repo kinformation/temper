@@ -210,6 +210,11 @@ class USBRead(object):
       self._parse_bytes('internal temperature', 2, 100.0, bytes, info)
       return info
 
+    if info['firmware'][:15] == 'TEMPerGold_V3.4':
+      info['firmware'] = info['firmware'][:15]
+      self._parse_bytes('internal temperature', 2, 100.0, bytes, info)
+      return info
+
     if info['firmware'][:12] in [ 'TEMPerX_V3.1', 'TEMPerX_V3.3' ]:
       info['firmware'] = info['firmware'][:12]
       self._parse_bytes('internal temperature', 2, 100.0, bytes, info)
